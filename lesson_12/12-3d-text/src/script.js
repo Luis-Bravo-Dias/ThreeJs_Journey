@@ -20,12 +20,14 @@ const scene = new THREE.Scene()
 
 //Axes helper
 const axesHelper = new THREE.AxesHelper()
-scene.add(axesHelper)
+//scene.add(axesHelper)
 
 /**
  * Textures
  */
 const textureLoader = new THREE.TextureLoader()
+const matcapTexture = textureLoader.load('/textures/matcaps/5.png')
+matcapTexture.colorSpace = THREE.SRGBColorSpace
 
 /*
 * Fonts
@@ -56,11 +58,17 @@ fontLoader.load(
             - (textGeo.boundingBox.max.y - 0.02) / 2,
             - (textGeo.boundingBox.max.z - 0.03) / 2
         )*/
-       textGeo.center()
-        const textMaterial = new THREE.MeshBasicMaterial()
-        textMaterial.wireframe = true
+        textGeo.center()
+        const textMaterial = new THREE.MeshMatcapMaterial()
+        textMaterial.matcap = matcapTexture
+        textMaterial.wireframe = false
         const text = new THREE.Mesh(textGeo, textMaterial)
         scene.add(text)
+
+        for(let i = 0; i < 100; i++)
+        {
+            const donutGeo = new THREE.TorusGeometry(0.3, 0.2, 20, 45)
+        }
     }
 )
 
