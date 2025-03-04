@@ -22,7 +22,21 @@ ambientLight.color = new THREE.Color('0xffffff')
 ambientLight.intensity = 1
 scene.add(ambientLight)
 
+const directionalLight =new THREE.DirectionalLight(0x00fffc, 0.9)
+directionalLight.position.set(1,0.25, 0)
+scene.add(directionalLight)
+
+const hemisphereLight = new THREE.HemisphereLight(0xff0000, 0x0000ff, 0.9)
+scene.add(hemisphereLight)
+
+const pointLight = new THREE.PointLight(0xff9000, 1.5)
+pointLight.position.set(1, -0,5, 1)
+scene.add(pointLight)
+
 gui.add(ambientLight, 'intensity').min(0).max(3).step(0.001)
+gui.add(directionalLight, 'intensity').min(0).max(3).step(0.001)
+gui.add(hemisphereLight, 'intensity').min(0).max(3).step(0.001)
+gui.add(pointLight, 'intensity').min(0).max(3).step(0.001)
 
 /**
  * Objects
