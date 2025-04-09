@@ -21,6 +21,7 @@ const textureLoader = new THREE.TextureLoader()
 //Floor
 const floorAlphaTexture = textureLoader.load('./floor/alpha.jpg')
 const floorColorTexture = textureLoader.load('./floor/forest_leaves_02_1k/forest_leaves_02_diffuse_1k.jpg')
+const floorARMTexture = textureLoader.load('./floor/forest_leaves_02_1k/forest_leaves_02_arm_1k.jpg')
 
 /**
  * House
