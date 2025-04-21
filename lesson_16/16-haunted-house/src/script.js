@@ -22,6 +22,13 @@ const textureLoader = new THREE.TextureLoader()
 const floorAlphaTexture = textureLoader.load('./floor/alpha.jpg')
 const floorColorTexture = textureLoader.load('./floor/forest_leaves_02_1k/forest_leaves_02_diffuse_1k.jpg')
 const floorARMTexture = textureLoader.load('./floor/forest_leaves_02_1k/forest_leaves_02_arm_1k.jpg')
+const floorNormalTexture = textureLoader.load('./floor/forest_leaves_02_1k/forest_leaves_02_nor_gl_1k.jpg')
+const floorDisplacementTexture = textureLoader.load('./floor/forest_leaves_02_1k/forest_leaves_02_disp_1k.jpg')
+
+floorColorTexture.repeat.set(8, 8)
+
+floorColorTexture.wrapS = THREE.RepeatWrapping
+floorColorTexture.wrapT = THREE.RepeatWrapping
 
 /**
  * House
@@ -32,7 +39,8 @@ const floor = new THREE.Mesh(
     new THREE.PlaneGeometry(20, 20),
     new THREE.MeshStandardMaterial({
         alphaMap: floorAlphaTexture,
-        transparent: true
+        transparent: true,
+        map: floorColorTexture
     })
 )
 floor.rotation.x = - Math.PI * 0.5
