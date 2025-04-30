@@ -45,6 +45,13 @@ floorARMTexture.wrapT = THREE.RepeatWrapping
 floorNormalTexture.wrapT = THREE.RepeatWrapping
 floorDisplacementTexture.wrapT = THREE.RepeatWrapping
 
+//wall
+const wallColorTexture = textureLoader.load('./wall/brick_4_1k/brick_4_diff_1k.jpg')
+const wallARMTexture = textureLoader.load('./wall/brick_4_1k/brick_4_arm_1k.jpg')
+const wallNormalTexture = textureLoader.load('./wall/brick_4_1k/brick_4_nor_gl_1k.jpg')
+
+wallColorTexture.colorSpace = THREE.SRGBColorSpace
+
 /**
  * House
  */
@@ -81,7 +88,13 @@ const wallHeight = 2.5
 const houseSize = 4
 const walls = new THREE.Mesh(
     new THREE.BoxGeometry(4, wallHeight, houseSize),
-    new THREE.MeshStandardMaterial()
+    new THREE.MeshStandardMaterial({
+        map: wallColorTexture,
+        aoMap: wallARMTexture,
+        roughnessMap: wallARMTexture,
+        metalnessMap: wallARMTexture,
+        normalMap: wallNormalTexture,
+    })
 )
 walls.position.y += wallHeight / 2
 house.add(walls)
