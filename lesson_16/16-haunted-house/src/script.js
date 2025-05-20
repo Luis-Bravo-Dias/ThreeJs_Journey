@@ -47,10 +47,18 @@ floorDisplacementTexture.wrapT = THREE.RepeatWrapping
 
 //wall
 const wallColorTexture = textureLoader.load('./wall/brick_4_1k/brick_4_diff_1k.jpg')
-const wallARMTexture = textureLoader.load('./wall/brick_4_1k/brick_4_arm_1k.jpg')
-const wallNormalTexture = textureLoader.load('./wall/brick_4_1k/brick_4_nor_gl_1k.jpg')
+const wallARMTexture =   textureLoader.load('./wall/brick_4_1k/brick_4_arm_1k.jpg')
+const wallNormalTexture =textureLoader.load('./wall/brick_4_1k/brick_4_nor_gl_1k.jpg')
 
 wallColorTexture.colorSpace = THREE.SRGBColorSpace
+
+//roof
+const roofColorTexture = textureLoader.load('./roof/roof_07_1k/roof_07_diff_1k.jpg')
+const roofARMTexture = textureLoader.load('./roof/roof_07_1k/roof_07_arm_1k.jpg')
+const roofNormalTexture = textureLoader.load('./roof/roof_07_1k/roof_07_nor_gl_1k.jpg')
+
+roofColorTexture.colorSpace = THREE.SRGBColorSpace
+
 
 /**
  * House
@@ -103,7 +111,13 @@ house.add(walls)
 const coneSize = 1.5
 const roof = new THREE.Mesh(
     new THREE.ConeGeometry(3.5, coneSize, 4),
-    new THREE.MeshStandardMaterial()
+    new THREE.MeshStandardMaterial({
+        map:          roofColorTexture,
+        aoMap:        roofARMTexture,
+        roughnessMap: roofARMTexture,
+        metalnessMap: roofARMTexture,
+        normalMap:    roofNormalTexture,
+    })
 )
 roof.position.y = wallHeight + (coneSize / 2)
 roof.rotation.y = Math.PI / 2 / 2
