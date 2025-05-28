@@ -327,6 +327,52 @@ renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
 /**
+ * Shadows
+ */
+//Renderer
+renderer.shadowMap.enabled = true
+renderer.shadowMap.type = THREE.PCFSoftShadowMap
+
+//Cast and receive
+directionalLight.castShadow = true
+ghost1.castShadow = true
+ghost2.castShadow = true
+ghost3.castShadow = true
+
+walls.castShadow = true
+walls.receiveShadow = true
+roof.castShadow = true
+floor.receiveShadow = true
+
+for(const grave of graves.children)
+{
+    grave.castShadow = true
+    grave.receiveShadow = true
+}
+
+// Mapping
+directionalLight.shadow.mapSize.width = 256
+directionalLight.shadow.mapSize.height = 256
+directionalLight.shadow.camera.top = 8
+directionalLight.shadow.camera.right = 8
+directionalLight.shadow.camera.bottom = - 8
+directionalLight.shadow.camera.left = - 8
+directionalLight.shadow.camera.near = 1
+directionalLight.shadow.camera.far = 20
+
+ghost1.shadow.mapSize.width = 256
+ghost1.shadow.mapSize.height = 256
+ghost1.shadow.camera.far = 10
+
+ghost2.shadow.mapSize.width = 256
+ghost2.shadow.mapSize.height = 256
+ghost2.shadow.camera.far = 10
+
+ghost3.shadow.mapSize.width = 256
+ghost3.shadow.mapSize.height = 256
+ghost3.shadow.camera.far = 10
+
+/**
  * Animate
  */
 const timer = new Timer()
@@ -338,20 +384,20 @@ const tick = () =>
     const elapsedTime = timer.getElapsed()
 
     //Ghost
-    const ghostAngle = elapsedTime * 0.5
-    ghost1.position.x = Math.cos(ghostAngle) * 4
-    ghost1.position.z = Math.sin(ghostAngle) * 4
-    ghost1.position.y = Math.sin(ghostAngle * 2.34) * Math.sin(ghostAngle * 3.45)
+    const ghost1Angle = elapsedTime * 0.5
+    ghost1.position.x = Math.cos(ghost1Angle) * 4
+    ghost1.position.z = Math.sin(ghost1Angle) * 4
+    ghost1.position.y = Math.sin(ghost1Angle) * Math.sin(ghost1Angle * 2.34) * Math.sin(ghost1Angle * 3.45)
 
     const ghostAngle2 = - elapsedTime * 0.38
     ghost2.position.x = Math.cos(ghostAngle2) * 5
     ghost2.position.z = Math.sin(ghostAngle2) * 5
-    ghost2.position.y = Math.sin(ghostAngle2 * 2.34) * Math.sin(ghostAngle2 * 3.45)
+    ghost2.position.y = Math.sin(ghostAngle2) * Math.sin(ghostAngle2 * 2.34) * Math.sin(ghostAngle2 * 3.45)
 
     const ghostAngle3 = elapsedTime * 0.23
     ghost3.position.x = Math.cos(ghostAngle3) * 6
     ghost3.position.z = Math.sin(ghostAngle3) * 6
-    ghost3.position.y = Math.sin(ghostAngle3 * 2.34) * Math.sin(ghostAngle3 * 3.45)
+    ghost3.position.y = Math.sin(ghostAngle3) * Math.sin(ghostAngle3 * 2.34) * Math.sin(ghostAngle3 * 3.45)
 
     // Update controls
     controls.update()
