@@ -137,10 +137,20 @@ const house = new THREE.Group()
 scene.add(house)
 
 //walls
-const wallHeight = 2.5
-const houseSize = 4
-const walls = new THREE.Mesh(
+const wallHeight = 8
+const houseSize = 2
+/*const walls = new THREE.Mesh(
     new THREE.BoxGeometry(4, wallHeight, houseSize),
+    new THREE.MeshStandardMaterial({
+        map: wallColorTexture,
+        aoMap: wallARMTexture,
+        roughnessMap: wallARMTexture,
+        metalnessMap: wallARMTexture,
+        normalMap: wallNormalTexture,
+    })
+)*/
+const walls = new THREE.Mesh(
+    new THREE.CylinderGeometry(houseSize, houseSize, wallHeight, 8),
     new THREE.MeshStandardMaterial({
         map: wallColorTexture,
         aoMap: wallARMTexture,
@@ -150,12 +160,13 @@ const walls = new THREE.Mesh(
     })
 )
 walls.position.y += wallHeight / 2
+walls.rotation.y = 0.4
 house.add(walls)
 
 //roof
 const coneSize = 1.5
 const roof = new THREE.Mesh(
-    new THREE.ConeGeometry(3.5, coneSize, 4),
+    new THREE.ConeGeometry(3.5, coneSize, 8),
     new THREE.MeshStandardMaterial({
         map:          roofColorTexture,
         aoMap:        roofARMTexture,
@@ -185,8 +196,11 @@ const door = new THREE.Mesh(
     })
 )
 door.position.y = 1
-door.position.z = houseSize / 2 + 0.01
+door.position.z = houseSize - 0.18
 house.add(door)
+
+house.rotation.z = -0.1
+house.position.y -= 0.1
 
 //Bushes
 const bushGeometry = new THREE.SphereGeometry(1, 16, 16)
@@ -218,7 +232,7 @@ const bush4 = new THREE.Mesh(bushGeometry, bushMaterial)
 bush4.scale.set(0.15, 0.15, 0.15)
 bush4.position.set(-1, 0.05, 2.6)
 bush4.rotation.x = -0.75
-house.add(bush1, bush2, bush3, bush4)
+scene.add(bush1, bush2, bush3, bush4)
 
 //Graves
 const graveHeigth = 0.8
@@ -269,7 +283,7 @@ scene.add(directionalLight)
 
 //Door light
 const doorLight = new THREE.PointLight('#ff7d46', 5)
-doorLight.position.set(0, 2.2, 2.5)
+doorLight.position.set(0, 1.8, 2.5)
 house.add(doorLight)
 
 /**
